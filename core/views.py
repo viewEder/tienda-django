@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 # Create your views here.
 class HomePageView(TemplateView):
     # atributos de TemplateView:
-    template_name: 'core/base.html'
+    template_name= 'core/base.html'
 
     # atributos propios:
     dicc_context = {
@@ -15,4 +15,4 @@ class HomePageView(TemplateView):
 
     # Utilizando los métodos de la clase, sobreescribios get:
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        return render(request, self.template_name, self.dicc_context)
