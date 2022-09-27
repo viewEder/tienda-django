@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 # Create your views here.
 class HomePageView(TemplateView):
     # atributos de TemplateView:
-    template_name = 'core/base.html'
+    template_name = 'core/index.html'
 
     # atributos propios:
     dicc_context = {
