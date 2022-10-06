@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+{% block titulo %}Perfil de Usuario{% endblock %}
+
+{% block content %}
+
+    <section class="container">
+        <div class="row">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-5">
+                        <h2 class="text-center">{{ user.first_name }} {{ user.last_name }}</h2>
+                        {% if request.user.perfilusuario.avatar %}
+                            <div class="col text-center">
+                                <img src="{{ request.user.perfilusuario.avatar.url }}" alt="Imagen de Perfil " class="col-12 img-fluid">
+                                <label for="">¿Borrar Imagen?</label>
+                                <input type="radio" name="avatar-clear" id="avatar-clear">
+                            </div>
+                            
+                        {% else %}
+                            <div class="col text-center">
+                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffututel.com%2Fimages%2Ftutorials%2Fwebservices-http-api-playsms-para-agregar-una-cuenta-de-usuario.png&f=1&nofb=1&ipt=9095443b95f1f6f8be0d1b41c196439dd6f173adfe889e367a38bd9b62710271&ipo=images" alt="Imagen de Perfil " class="img-fluid">
+                                {{ form.img_perfil }}
+                            </div>                   
+                        {% endif %}
+                    </div>
+                    <div class="col-7">
+                        <div class="col mt-2">
+                            <label for="">Tipo de Identificación</label>
+                            {{ form.tipo_identificacion }}
+                        </div>
+                        <div class="col mt-2">
+                            <label for="">Identificación</label>
+                            {{ form.identificacion_usuario }}
+                        </div>
+                        <div class="col mt-2">
+                            <label for="">Género</label>
+                            {{ form.genero_user }}
+                        </div>
+                        <div class="col mt-2">
+                            <label for="">Teléfono</label>
+                            {{ form.telefono }}
+                        </div>
+                        <div class="col mt-2">
+                            <label for="">Dirección</label>
+                            {{ form.direccion }}
+                        </div>
+                        <div class="col mt-3 text-center">
+                            <button type="submit" class="col-12 btn btn-lg btn-primary">Actualizar Datos</button>
+                        </div>
+                    </div>
+                </div>
+            </form>      
+        </div>
+    </section>
+
+{% endblock %}

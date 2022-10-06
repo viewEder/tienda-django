@@ -1,58 +1,37 @@
 {% extends 'core/base.html' %}
-{% block titulo %} Ingreso a la PythonGRAM {% endblock %}
+<!-- Variables de etiqueta html: -->
+{% block titulo %}Ingreso A djangoStore{% endblock %}
 
-{% block contenido %}
+{% block content %}
     {% load static %}
-    <section class="h-100 text-center text-white bg-dark mb-5">
-        <section class="container h-100">
-            <div class="row">
-                <div class="col-8 mt-5">
-                    <button class="w-100 btn btn-lg btn-success" type="submit">
-                        Registate
-                    </button>
-                </div>
-                <div class="col-4 mt-5">
-                    <main class="form-signin">
-                        <form method="post">
-                            {% csrf_token %}
-                            <img class="mb-4" src="{% static '' %}" alt="" width="72"/>
-                            <h1 class="h3 mb-3 fw-normal">Ingresar</h1>
-                
-                            <div class="form-floating">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="id_username"
-                                    name="username"
-                                    placeholder="name"
-                                />
-                                <label for="floatingInput" class="text-success">Usuario</label>
-                            </div>
-                            <div class="form-floating">
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="id_password"
-                                    name="password"
-                                    placeholder="Password"
-                                />
-                                <label for="floatingPassword" class="text-success"
-                                >Password</label
-                                >
-                            </div>
-                
-                            <div class="checkbox mb-5 mt-5"></div>
-                            <button class="w-100 btn btn-lg btn-primary" type="submit">
-                                Iniciar Sesion
-                            </button>
-                            <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-                            
-                        </form>
-                    </main>
-                </div>
+    <!--Contenido de la pagina:-->
+    <main class="form-signin align-middle mt-5">
+        {% if 'register' in request.GET %}
+            <div class="alert alert-success" role="alert">
+                Usuario registrado correctamente!
             </div>
-        </section>
-    </section>
+        {% endif %}
+        <form action="" method="post">{% csrf_token %}            
+        <img class="mb-4 img-fluid rounded mx-auto d-block col-5" src="{% static '' %}" alt="" >
+        <h1 class="h3 mb-3 fw-normal text-center">Login to App</h1>
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                Usuario y/o Password Incorrectos!!. Intenta de Nuevo!
+            </div>
+            {% endif %}
+        <div class="form-floating">
+            <input type="text" name="username" required class="form-control" id="id_username" placeholder="Nombre de Usuario">
+            <label for="floatingInput">Usuario</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" name="password" required class="form-control" id="id_password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+    
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sing In</button>
+        <div class="text-center"><p class="text-center"> No tienes cuenta? <a class="nav-link" href="{% url 'registro' %}">Registrate</a> </p></div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        </form>
+    </main>
 
-
-    {% endblock %}
+{% endblock %}

@@ -38,8 +38,8 @@ class RegistroView(CreateView):
 @method_decorator(login_required, name='dispatch')
 class PerfilUpdate(UpdateView):
     form_class = PerfilForm
-    success_url = reverse_lazy('perfil')
-    template_name = 'registration/perfil_form.html'
+    success_url = reverse_lazy('profile')
+    template_name = 'registration/profile_form.html'
 
     # Sobreescribimos el método get_object:
     def get_object(self):

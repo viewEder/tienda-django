@@ -5,5 +5,5 @@ from .views import RegistroView, PerfilUpdate
 
 urlpatterns = [
     path('registro/', RegistroView.as_view(), name='registro'),
-    path('profile/', PerfilUpdate.as_view(), name='perfil'),
+    path('profile/', PerfilUpdate.as_view(), name='profile'),
 ]
