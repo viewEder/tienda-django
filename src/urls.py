@@ -19,5 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('core.urls')),
+    # Rutas de administracion
     path('admin/', admin.site.urls),
+    # Rutas de registration:
+    path('accounts/', include('django.contrib.auth.urls')),      # Ruta de sobreescritura de login
+    path('accounts/', include('registration.urls')),
 ]

@@ -22,9 +22,9 @@ def subir_avatar(instance, nombre_archivo):
 class PerfilUsuario(models.Model):
     usuario = models.OneToOneField(User, on_delete = CASCADE)
     img_perfil = models.ImageField(upload_to = subir_avatar, null = True, blank = True)
-    genero_user = models.CharField(verbose_name = "Género", choices = Generos, max_lenght = 20, null = False, default = "Otro")
-    tipo_identificacion = models.CharField(verbose_name = "Tipo de Documento de Identidad", choices = TiposIdentificacion, max_lenght = 50, null = False, default = "Sin Identificar")
-    identificacion_usuario = models.CharField(verbose_name = "Número de Identificación", max_lenght = 50, null = False,)
+    genero_user = models.CharField(verbose_name = "Género", choices = Generos, max_length = 20, null = False, default = "Otro")
+    tipo_identificacion = models.CharField(verbose_name = "Tipo de Documento de Identidad", choices = TiposIdentificacion, max_length = 50, null = False, default = "Sin Identificar")
+    identificacion_usuario = models.CharField(verbose_name = "Número de Identificación", max_length = 50, null = False,)
     direccion = models.TextField(verbose_name = "Dirección Postal", null = True, blank = True)
     telefono = models.CharField(verbose_name = "Teléfono", max_length=20, null = True, blank = True)
     # Atributos de Auditoria:
@@ -35,7 +35,7 @@ class PerfilUsuario(models.Model):
     class Meta:
         verbose_name = 'Perfil de Usuario'
         verbose_name_plural = 'Perfiles de Usuarios'
-        ordering = ['usuario__username']
+        # ordering = ['usuario__username']
 
 # Función usa decoradores para usuarios que se encuentren creados:
 @receiver(post_save, sender = User)

@@ -11,7 +11,7 @@ from .models import PerfilUsuario
 class PerfilForm(forms.ModelForm):
     # Pasamos la metadata del formulario:
     class Meta:
-        model = PerfilUsuario,
+        model = PerfilUsuario
         fields = ['img_perfil','genero_user','tipo_identificacion','identificacion_usuario','direccion','telefono']
         widgets = {
             'img_perfil' : forms.ClearableFileInput(attrs = {'class':'form-control mt-2'}),
