@@ -59,14 +59,14 @@
                         <span class="text-capitalize">{{ user.username }}</span>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-end">
-                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><a class="dropdown-item" href="{% url 'profile' %}""><i class="bi bi-person-badge text-primary"></i> Ver Perfil</a></li>
                         <li><button class="dropdown-item" type="button">Another action</button></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-door-closed-fill text-danger"></i> Cerrar Sesión</a></li>
                       </ul>
                     </div>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                      
                     </li>
                   {% else %}
                     <li class="nav-item">

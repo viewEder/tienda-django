@@ -13,9 +13,9 @@ from core.types.tipoId import TiposIdentificacion
 
 # Paso 6: Función Global para guardar imagen de perfil de usuario:
 def subir_avatar(instance, nombre_archivo):
-    anterior_instancia = PerfilUsuario.objects.get(pk = instance.pk)
+    anterior_instancia = PerfilUsuario.objects.get(pk=instance.pk)
     anterior_instancia.img_perfil.delete()
-    return 'perfiles/' + nombre_archivo
+    return 'imgperfil/' + nombre_archivo
 
 # Paso 7: Create your models here.
 
@@ -35,7 +35,7 @@ class PerfilUsuario(models.Model):
     class Meta:
         verbose_name = 'Perfil de Usuario'
         verbose_name_plural = 'Perfiles de Usuarios'
-        # ordering = ['usuario__username']
+        ordering = ['usuario__username']
 
 # Función usa decoradores para usuarios que se encuentren creados:
 @receiver(post_save, sender = User)

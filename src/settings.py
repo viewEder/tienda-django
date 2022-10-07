@@ -125,6 +125,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# MEDIA URL AND ROOT:
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'core/static/media/img')
+
+# Configuración de archivos estáticos:
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# Configuración de cierre de sesión:
+LOGOUT_REDIRECT_URL = 'inicio'
+
+# Configuracion de inicio de sesion:
+LOGIN_REDIRECT_URL = 'inicio'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

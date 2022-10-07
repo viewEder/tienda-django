@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# Importamos settings.py:
+from django.conf import settings
 
 
 urlpatterns = [
@@ -25,3 +27,11 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),      # Ruta de sobreescritura de login
     path('accounts/', include('registration.urls')),
 ]
+
+# Validación de modo desarrollo:
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+# Cambiar el titulo del administrador de DJANGO:
+admin.site.site_header = "Eder's Rules"
