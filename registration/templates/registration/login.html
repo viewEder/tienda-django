@@ -12,7 +12,7 @@
             </div>
         {% endif %}
         <form action="" method="post">{% csrf_token %}            
-        <img class="mb-4 img-fluid rounded mx-auto d-block col-5" src="{% static '' %}" alt="" >
+        <img class="mb-4 img-fluid rounded mx-auto d-block col-7" src="{% static 'media/img/djangologo.png' %}" alt="" >
         <h1 class="h3 mb-3 fw-normal text-center">Login to App</h1>
             {% if form.non_field_errors %}
             <div class="alert alert-danger" role="alert">
@@ -28,9 +28,9 @@
             <label for="floatingPassword">Password</label>
         </div>
     
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sing In</button>
-        <div class="text-center"><p class="text-center"> No tienes cuenta? <a class="nav-link" href="{% url 'registro' %}">Registrate</a> </p></div>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+        <div class="text-center"><p class="text-center"> No tienes cuenta? <a class="nav-link btn btn-outline-success" href="{% url 'registro' %}">Registrate</a> </p></div>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017–2022</p>
         </form>
     </main>
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,8 @@
     <!-- CDN para manejo de estilos: -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Estilos para login: -->
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 <body>
     <header>
@@ -20,10 +23,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item ">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                    <a class="nav-link {% if request.path == '/' %}active {% endif %}"" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Catalogo</a>
+                    <a class="nav-link" href="#">Catalogo</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,10 +43,43 @@
                     <a class="nav-link disabled">Disabled</a>
                   </li>
                 </ul>
+                <!-- Adición de elementos para control de inicio de sesion y usuario, dropdown de opciones de usuario -->
+                <ul class="navbar-nav"> 
+                  {% if request.user.is_authenticated %}
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- Adición de imagen de perfil a la barra de menú -->
+                        {% if request.user.perfilmodel.img_perfil %}
+                          <img src="{{ user.perfilmodel.img_perfil.url }}" class="img-thumbnail rounded-circle" width="38" alt="">
+                        {% else %}
+                          <!-- <img src="{% static 'media/img/djangologo.png' %}" class="img-thumbnail rounded-circle" width="38" alt=""> -->
+                          <i class="bi bi-person-circle"></i>
+                        {% endif %}
+                        <!-- Imprimimos el username del usuario logueado, y le damos un poco de estilo: -->
+                        <span class="text-capitalize">{{ user.username }}</span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                      </ul>
+                    </div>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link btn {% if request.path != '/accounts/login/' %} btn-outline-success {% else %} btn-success active {% endif %}" href="{% url 'login' %}"><i class="bi bi-door-open-fill text-warning"></i> Ingresar</a>
+                    </li>
+                  {% endif %}
+                </ul>
+                <!--
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
+                  <button class="btn btn-outline-success" type="button"></button>
                 </form>
+                -->
               </div>
             </div>
           </nav>
