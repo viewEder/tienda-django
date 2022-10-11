@@ -127,9 +127,9 @@ STATIC_URL = '/static/'
 
 # MEDIA URL AND ROOT:
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'core/static/media/img')
+MEDIA_ROOT = os.path.join(BASE_DIR, "core/static/media/img")
 
-# Configuración de archivos estáticos:
+# Statics en todas las apps:
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )

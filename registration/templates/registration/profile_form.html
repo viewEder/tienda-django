@@ -2,10 +2,10 @@
 {% block titulo %}Perfil de Usuario{% endblock %}
 
 {% block content %}
-
+{% load static %}
     <section class="container">
         <div class="row">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-5">
@@ -14,16 +14,17 @@
                             <div class="col text-center">
                                 <img src="{{ request.user.perfilusuario.avatar.url }}" alt="Imagen de Perfil " class="col-12 img-fluid">
                                 <label for="">¿Borrar Imagen?</label>
-                                <input type="radio" name="avatar-clear" id="avatar-clear">
+                                <input type="radio" name="avatar-clear" id="avatar-clear"><br>
                             </div>
                             
                         {% else %}
                             <div class="col text-center">
-                                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffututel.com%2Fimages%2Ftutorials%2Fwebservices-http-api-playsms-para-agregar-una-cuenta-de-usuario.png&f=1&nofb=1&ipt=9095443b95f1f6f8be0d1b41c196439dd6f173adfe889e367a38bd9b62710271&ipo=images" alt="Imagen de Perfil " class="img-fluid">
-                                {{ form.img_perfil }}
+                                <img src="{% static 'media/img/djangologo.png' %}" alt="Imagen de Perfil " class="img-fluid">
+                                {{ form.avatar }}
                             </div>                   
                         {% endif %}
                     </div>
+
                     <div class="col-7">
                         <div class="col-12 pd-2 bg-success mt-1">
                             <h3 class="text-light text-center">Datos Personales</h3>
@@ -52,6 +53,7 @@
                             <button type="submit" class="col-12 btn btn-lg btn-primary">Actualizar Datos</button>
                         </div>
                     </div>
+                    
                 </div>
             </form>      
         </div>

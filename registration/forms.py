@@ -12,9 +12,9 @@ class PerfilForm(forms.ModelForm):
     # Pasamos la metadata del formulario:
     class Meta:
         model = PerfilUsuario
-        fields = ['img_perfil','genero_user','tipo_identificacion','identificacion_usuario','direccion','telefono']
+        fields = ['avatar','genero_user','tipo_identificacion','identificacion_usuario','direccion','telefono']
         widgets = {
-            'img_perfil' : forms.ClearableFileInput(attrs = {'class':'form-control mt-2'}),
+            'avatar' : forms.ClearableFileInput(attrs = {'class':'form-control mt-2'}),
             'genero_user' : forms.Select(attrs = {'class':'form-select mt-2'}),
             'tipo_identificacion' : forms.Select(attrs = {'class':'form-select mt-2'}),
             'identificacion_usuario' : forms.TextInput(attrs = {'class':'form-control mt-2'}),

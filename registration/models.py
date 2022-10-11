@@ -14,14 +14,14 @@ from core.types.tipoId import TiposIdentificacion
 # Paso 6: Función Global para guardar imagen de perfil de usuario:
 def subir_avatar(instance, nombre_archivo):
     anterior_instancia = PerfilUsuario.objects.get(pk=instance.pk)
-    anterior_instancia.img_perfil.delete()
-    return 'imgperfil/' + nombre_archivo
+    anterior_instancia.avatar.delete()
+    return 'perfiles/' + nombre_archivo
 
 # Paso 7: Create your models here.
 
 class PerfilUsuario(models.Model):
     usuario = models.OneToOneField(User, on_delete = CASCADE)
-    img_perfil = models.ImageField(upload_to = subir_avatar, null = True, blank = True)
+    avatar = models.ImageField(upload_to = subir_avatar, null = True, blank = True)
     genero_user = models.CharField(verbose_name = "Género", choices = Generos, max_length = 20, null = False, default = "Otro")
     tipo_identificacion = models.CharField(verbose_name = "Tipo de Documento de Identidad", choices = TiposIdentificacion, max_length = 50, null = False, default = "Sin Identificar")
     identificacion_usuario = models.CharField(verbose_name = "Número de Identificación", max_length = 50, null = False,)
