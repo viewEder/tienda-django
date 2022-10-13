@@ -11,10 +11,27 @@ from django.db.models.signals import post_save
 from core.types.generos import Generos
 from core.types.tipoId import TiposIdentificacion
 
+# Importar OS:
+import os
+
 # Paso 6: Función Global para guardar imagen de perfil de usuario:
 def subir_avatar(instance, nombre_archivo):
     anterior_instancia = PerfilUsuario.objects.get(pk=instance.pk)
+    # Validamos si existe una imagen anterior
+    if anterior_instancia.img_perfil:
+        # asignamos una variable para el manejo del arrchivo:
+        imagen = anterior_instancia.img_perfil
+        # Validamos si efectivamente es un archivo:
+        if imagen.file:
+            # Si es un archivo,tomaremos su ubicación:
+            if os.path.isfile(imagen.path):
+                # Cerramos el archivo por si se encuentra en uso:
+                imagen.file.close()
+                # Eliminamos el archivo usando los métodos del sistema operativo:
+                os.remove(imagen.path)
+
     anterior_instancia.img_perfil.delete()
+
     return 'imgperfil/' + nombre_archivo
 
 # Paso 7: Create your models here.
