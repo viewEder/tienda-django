@@ -9,14 +9,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item ">
-              <a class="nav-link {% if request.path == '/' %}active {% endif %}"" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
+              <a class="nav-link {% if request.path == '/' %}active {% endif %}" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Catalogo</a>
+              <a class="nav-link {% if request.path == '/catalogo' %}active {% endif %}" href="{% url 'catalogo' %}">Catalogo</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Productos
+                Categorias
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -56,8 +56,8 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="{% url 'profile' %}""><i class="bi bi-person-badge text-primary"></i> Ver Perfil</a></li>
-                  {% if user.is_superuser %}
-                    <li><a class="dropdown-item" href="/admin/"></a></li>
+                  {% if request.user.is_superuser %}
+                    <li><a class="dropdown-item" href="/admin/"><i class="bi bi-gear-fill"></i> Administración</li></a>
                   {% endif %}
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-door-closed-fill text-danger"></i> Cerrar Sesión</a></li>

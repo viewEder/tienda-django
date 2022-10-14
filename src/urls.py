@@ -26,6 +26,7 @@ urlpatterns = [
     # Rutas de registration:
     path('accounts/', include('django.contrib.auth.urls')),      # Ruta de sobreescritura de login
     path('accounts/', include('registration.urls')),
+    path('tienda/', include('pedidos.urls')),
 ]
 
 # Validación de modo desarrollo:

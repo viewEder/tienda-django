@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% block titulo %}Catálogo{% endblock %}
+
+{% block content %}
+    {% load static %}
+
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                {% include 'core/sidenav.html' %}
+            </div>
+            <div class="col-10 row">
+                {% for item in productos %}
+                    <div class="card col-3 mt-2">
+                        {% if item.imagen_producto %}
+                            <img src="{{ item.imagen_producto.url }}" class="card-img-top" alt="" >
+                        {% else %}
+                            <img src="{% static 'media/img/nodisponible.png' %}" class="card-img-top" alt="" >
+                        {% endif %}
+                        <div class="card-body"> 
+                            <h4 class="card-title">{{ item.nombre_producto }}</h4>
+                            <div class="row justify-content-between">
+                                <h5 class="card-text text-success col-12 align-self-center">
+                                    Hoy: $ {{ item.valor_venta }}
+                                </h5>
+                                <a 
+                                    href="#" 
+                                    class="col-12 btn btn-lg btn-primary">
+                                    <small>Agregar </small>
+                                    <i class="bi bi-cart-plus-fill"></i>
+                                </a> 
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Categoría : <strong>{{ item.categoria }}</strong></small>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
