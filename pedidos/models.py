@@ -1,6 +1,6 @@
-from email.policy import default
-from django.db.models import CASCADE
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import CASCADE
 import os
 
 def subirImagenProducto(instance, filename):
@@ -44,7 +44,7 @@ class Producto(models.Model):
     imagen_producto = models.ImageField(upload_to = subirImagenProducto, verbose_name = "Imagen de Producto", null = True, blank = True)
     costo_producto = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Costo de Producto")
     valor_venta = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Valor de Venta de Producto")
-    cantidad_stock = models.IntegerField(verbose_name = "Cantidad Disponible", max_length = 4)
+    cantidad_stock = models.IntegerField(verbose_name = "Cantidad Disponible", validators=[MinValueValidator(0), MaxValueValidator(9999)])
     disponibilidad = models.BooleanField(default = True)
     # Atributos de Auditoria:
     create_at = models.DateField(auto_now = False, auto_now_add = True, verbose_name = "Fecha de creación", null = True, blank = True) 

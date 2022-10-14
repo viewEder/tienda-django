@@ -9,7 +9,11 @@
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-5">
-                        <h2 class="text-center">{{ user.first_name }} {{ user.last_name }}</h2>
+                        {% if request.user.perfilusuario.nombre_completo %}
+                            <h2 class="text-center">{{ user.perfilusuario.nombre_completo }}</h2>
+                        {% else %}
+                            <h2 class="text-center">Usuario Registrado</h2>
+                        {% endif %}
                         {% if request.user.perfilusuario.img_perfil %}
                             <div class="col text-center">
                                 <img src="{{ request.user.perfilusuario.img_perfil.url }}" alt="Imagen de Perfil " class="col-12 img-fluid">
@@ -24,31 +28,41 @@
                         {% endif %}
                     </div>
                     <div class="col-7">
-                        <div class="col-12 pd-2 bg-success mt-1">
-                            <h3 class="text-light text-center">Datos Personales</h3>
-                        </div>
-                        <div class="col mt-2">
-                            <label for="">Tipo de Identificación</label>
-                            {{ form.tipo_identificacion }}
-                        </div>
-                        <div class="col mt-2">
-                            <label for="">Identificación</label>
-                            {{ form.identificacion_usuario }}
-                        </div>
-                        <div class="col mt-2">
-                            <label for="">Género</label>
-                            {{ form.genero_user }}
-                        </div>
-                        <div class="col mt-2">
-                            <label for="">Teléfono</label>
-                            {{ form.telefono }}
-                        </div>
-                        <div class="col mt-2">
-                            <label for="">Dirección</label>
-                            {{ form.direccion }}
-                        </div>
-                        <div class="col mt-3 text-center">
-                            <button type="submit" class="col-12 btn btn-lg btn-primary">Actualizar Datos</button>
+                        <div class="row">
+                            <div class="col-12 pd-2 bg-success mt-1">
+                                <h3 class="text-light text-center">Datos Personales</h3>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="">Nombre Completo</label>
+                                {{ form.nombre_completo }}
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label for="">Tipo de Identificación</label>
+                                {{ form.tipo_identificacion }}
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label for="">Identificación</label>
+                                {{ form.identificacion_usuario }}
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="">Género</label>
+                                {{ form.genero_user }}
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="">Teléfono</label>
+                                {{ form.telefono }}
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="">Dirección</label>
+                                {{ form.direccion }}
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label for="">Complemento Dirección</label>
+                                {{ form.complemento_dirección }}
+                            </div>
+                            <div class="col-12   mt-2 text-center">
+                                <button type="submit" class="col-6 btn btn-lg btn-primary">Actualizar Datos</button>
+                            </div>
                         </div>
                     </div>
                 </div>

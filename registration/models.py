@@ -38,11 +38,13 @@ def subir_avatar(instance, nombre_archivo):
 
 class PerfilUsuario(models.Model):
     usuario = models.OneToOneField(User, on_delete = CASCADE)
+    nombre_completo = models.CharField(verbose_name = "Nombre Completos", max_length = 255, blank = True, null = True)
     img_perfil = models.ImageField(upload_to = subir_avatar, null = True, blank = True)
     genero_user = models.CharField(verbose_name = "Género", choices = Generos, max_length = 20, null = False, default = "Otro")
     tipo_identificacion = models.CharField(verbose_name = "Tipo de Documento de Identidad", choices = TiposIdentificacion, max_length = 50, null = False, default = "Sin Identificar")
     identificacion_usuario = models.CharField(verbose_name = "Número de Identificación", max_length = 50, null = False,)
     direccion = models.TextField(verbose_name = "Dirección Postal", null = True, blank = True)
+    complemento_dirección = models.CharField(verbose_name = 'Complemento de dirección', max_length = 255, blank = True, null = True)
     telefono = models.CharField(verbose_name = "Teléfono", max_length=20, null = True, blank = True)
     # Atributos de Auditoria:
     create_at = models.DateField(auto_now = False, auto_now_add = True, verbose_name = "Fecha de creación", null = True, blank = True) 
