@@ -1,4 +1,7 @@
 from django.shortcuts import render, HttpResponse
+# Paso 1. Importar la clase ListView
+from django.views.generic import ListView 
+
 # Importamos el modelo de datos de productos:
 from pedidos.models import Producto, Categoria
 
@@ -9,3 +12,7 @@ def catalogo(request):
     productos = Producto.objects.all()
 
     return render(request, template, {'productos': productos})
+
+class CatalogoView(ListView):
+    model = Producto
+    paginate_by = 6
