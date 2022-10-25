@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre_producto', models.CharField(max_length=50, verbose_name='Nombre')),
                 ('descripcion_producto', models.TextField(blank=True, null=True, verbose_name='Descripcion')),
-                ('imagen_producto', models.ImageField(blank=True, null=True, upload_to=pedidos.models.subirImagenProducto, verbose_name='Imagen de Producto')),
+                ('imagen_producto', models.ImageField(blank=True, null=True, upload_to="productos/", verbose_name='Imagen de Producto')),
                 ('costo_producto', models.DecimalField(decimal_places=2, max_digits=20, verbose_name='Costo de Producto')),
                 ('valor_venta', models.DecimalField(decimal_places=2, max_digits=20, verbose_name='Valor de Venta de Producto')),
                 ('cantidad_stock', models.IntegerField(max_length=4, verbose_name='Cantidad Disponible')),
