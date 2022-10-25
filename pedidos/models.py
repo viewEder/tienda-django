@@ -3,25 +3,6 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import CASCADE
 import os
 
-def subirImagenProducto(instance, filename):
-    old_instance = Producto.objects.get(pk=instance.pk)
-    # Validamos si existe una imagen anterior
-    if old_instance.imagen_producto:
-        # asignamos una variable para el manejo del arrchivo:
-        imagen = old_instance.imagen_producto
-        # Validamos si efectivamente es un archivo:
-        if imagen.file:
-            # Si es un archivo,tomaremos su ubicación:
-            if os.path.isfile(imagen.path):
-                # Cerramos el archivo por si se encuentra en uso:
-                imagen.file.close()
-                # Eliminamos el archivo usando los métodos del sistema operativo:
-                os.remove(imagen.path)
-
-    old_instance.imagen_producto.delete()
-
-    return 'productos/' + filename
-
 # Create your models here.
 class Categoria(models.Model):
     # Atributos propios
@@ -54,7 +35,7 @@ class Producto(models.Model):
     subcategoria = models.ForeignKey(SubCategoria, on_delete = CASCADE, null = True, blank = True)
     nombre_producto = models.CharField(verbose_name = "Nombre", max_length = 50)
     descripcion_producto = models.TextField(verbose_name = "Descripcion", null = True, blank = True)
-    imagen_producto = models.ImageField(upload_to = subirImagenProducto, verbose_name = "Imagen de Producto", null = True, blank = True)
+    imagen_producto = models.ImageField(upload_to = "productos/", verbose_name = "Imagen de Producto", null = True, blank = True)
     costo_producto = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Costo de Producto")
     valor_venta = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Valor de Venta de Producto")
     cantidad_stock = models.IntegerField(verbose_name = "Cantidad Disponible", validators=[MinValueValidator(0), MaxValueValidator(9999)])
@@ -63,6 +44,15 @@ class Producto(models.Model):
     create_at = models.DateField(auto_now = False, auto_now_add = True, verbose_name = "Fecha de creación", null = True, blank = True) 
     modify_at = models.DateField(auto_now = True, auto_now_add = False, verbose_name = "Fecha de actualización", null = True, blank = True)
 
+    def subirImagen(self):
+        if self.imagen_producto:
+            if os.path.isfile(self.imagen_producto.path):
+                 # Cerramos el archivo por si se encuentra en uso:
+                self.imagen_producto.file.close()
+                # Eliminamos el archivo usando los métodos del sistema operativo:
+                os.remove(self.imagen_producto.path)
+            return '{}'.format( self.imagen_producto)
+        
     class Meta:
         verbose_name_plural = 'Productos'
 
