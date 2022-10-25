@@ -35,10 +35,23 @@ class Categoria(models.Model):
 
     def __str__(self):
         return f'{self.nombre_categoria}'
+
+class SubCategoria(models.Model):
+    # Atributos propios
+    categoria = models.ForeignKey(Categoria, on_delete = CASCADE)
+    nombre_subcategoria = models.CharField(verbose_name = 'Nombre de Categoría', max_length = 50)
+    # Atributos de Auditoria:
+    create_at = models.DateField(auto_now = False, auto_now_add = True, verbose_name = "Fecha de creación", null = True, blank = True) 
+    modify_at = models.DateField(auto_now = True, auto_now_add = False, verbose_name = "Fecha de actualización", null = True, blank = True)
     
+    class Meta:
+        verbose_name_plural = 'Subcategoria'
+
+    def __str__(self):
+        return f'{self.nombre_subcategoria}'
 
 class Producto(models.Model):
-    categoria = models.ForeignKey(Categoria, on_delete = CASCADE)
+    subcategoria = models.ForeignKey(SubCategoria, on_delete = CASCADE, null = True, blank = True)
     nombre_producto = models.CharField(verbose_name = "Nombre", max_length = 50)
     descripcion_producto = models.TextField(verbose_name = "Descripcion", null = True, blank = True)
     imagen_producto = models.ImageField(upload_to = subirImagenProducto, verbose_name = "Imagen de Producto", null = True, blank = True)

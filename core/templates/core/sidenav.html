@@ -7,47 +7,25 @@
       <span class="fs-5 fw-semibold">Collapsible</span>
     </a>
     <ul class="list-unstyled ps-0">
+      {% for categoria in categorias %}
       <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          Home
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#{{ categoria.nombre_categoria  }}" aria-expanded="true">
+          {{ categoria.nombre_categoria }}
         </button>
-        <div class="collapse show" id="home-collapse" style="">
+        <div class="collapse show" id="{{ categoria.nombre_categoria  }}">
           <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            {% for categoria in categorias %}
-              <li>
-                <a href="#" class="link-dark d-inline-flex text-decoration-none rounded">{{ categoria.nombre_categoria }}</a>
-              </li>
+            {% for sub in subcategorias %}
+              {% if sub.categoria_id == categoria.id %}
+                <li>
+                  <a href="#" class="link-dark d-inline-flex text-decoration-none rounded">{{ sub.nombre_subcategoria }}</a>
+                </li>
+              {% endif %}
             {% endfor %}
           </ul>
         </div>
       </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-          Dashboard
-        </button>
-        <div class="collapse show" id="dashboard-collapse" style="">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Weekly</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Monthly</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Annually</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="true">
-          Orders
-        </button>
-        <div class="collapse show" id="orders-collapse" style="">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Processed</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Shipped</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Returned</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="border-top my-3"></li>
+      {% endfor %}
+      <!--Borrar:-->
       <li class="mb-1">
         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
           Account
@@ -61,6 +39,7 @@
           </ul>
         </div>
       </li>
+      <!--Hasta Aquí -->
     </ul>
   </div>
 
