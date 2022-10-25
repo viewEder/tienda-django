@@ -16,3 +16,4 @@ def catalogo(request):
 class CatalogoView(ListView):
     model = Producto
     paginate_by = 6
+

@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processor.verInstituto',
                 'core.context_processor.catalogoCategoria',
+                'core.context_processor.carritoCompras',
             ],
         },
     },
