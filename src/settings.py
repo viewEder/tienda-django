@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Aplicación para formatos de números:
+    'django.contrib.humanize',
     'core',
     'django_cleanup',
     'pedidos',

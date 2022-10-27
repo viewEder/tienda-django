@@ -51,7 +51,7 @@
                                     Hoy: $ {{ item.valor_venta }}
                                 </h5>
                                 <a 
-                                    href="#" 
+                                    href="{% url 'pedidos:agregar' item.id %}" 
                                     class="col-12 btn btn-lg btn-primary">
                                     <small>Agregar </small>
                                     <i class="bi bi-cart-plus-fill"></i>
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Categoría : <strong>{{ item.categoria }}</strong></small>
+                            <small class="text-muted">Categoría : <strong>{{ item.subcategoria }}</strong></small>
                         </div>
                     </div>
                 {% endfor %}

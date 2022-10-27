@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% block titulo %}Catálogo{% endblock %}
+
+{% block content %}
+    {% load static %}
+    {% load humanize %}
+        <h2>Este es nuestro carrito de compras</h2>
+        <h3>Cantidad de Articulos: {{ Cantidad_Carro }}</h3>
+        <h3>Total a pagar = {{ Total_Carro |intcomma }}</h3>
+    {% endblock %}
