@@ -27,6 +27,7 @@ class carritoCompras(TemplateView):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
 
+# Vistas funcionalidades del carrito de compras:
 def agregar_Producto(request, producto_id):
     carro = Carro(request)                              # Creamos un objeto de la clase carro
     producto = Producto.objects.get(id = producto_id)   # Ejecuto el query a la base de datos para que me traiga el producto agregado

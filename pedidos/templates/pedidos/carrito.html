@@ -1,10 +1,60 @@
 {% extends 'core/base.html' %}
-{% block titulo %}Catálogo{% endblock %}
+{% block titulo %}Carrito de compras{% endblock %}
 
 {% block content %}
     {% load static %}
     {% load humanize %}
-        <h2>Este es nuestro carrito de compras</h2>
-        <h3>Cantidad de Articulos: {{ Cantidad_Carro }}</h3>
-        <h3>Total a pagar = {{ Total_Carro |intcomma }}</h3>
+        <section class="container mt-5">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <!-- Validación de existencia de objetos en el carrito -->
+                        {% if request.session.carro.items %}
+                            <!-- Colocamos el resumen detallado del producto -->
+                            <!-- Cabeceras-->
+                            <div class="col-4 text-center">
+                                <h5 class="text-center">Vista Previa</h5>
+                            </div>
+                            <div class="col-4 text-center">
+                                <h5 class="text-center">Nombre Producto</h5>
+                            </div>
+                            <div class="col-2 text-center">
+                                <h5 class="text-center">Cant.</h5>
+
+                            </div>
+                            <div class="col-2 text-center">
+                                <h5 class="text-center">Total</h5>
+                            </div>
+
+                            <!-- Recorremos el diccionario del carrito con el detalle del mismo: -->
+                            
+                            {% for key, value in request.session.carro.items %}
+                                <div class="col-4 text-center">
+                                    <img src="{{ value.imagen.url }}" alt="" class="img-fluid">
+                                </div>
+                                <div class="col-4">
+                                    <h6 class="text-success">{{ value.nombre }}</h6>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <div class="form-control col">
+                                        <input type="text" class="form-control" value="{{ value.cantidad }}">
+                                    </div>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <h6 class="text-primary">{{ value.precio }}</h6>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="col bd-info">
+                                <h4 class="text-light">El carrito de compras está vacio</h4>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="col">
+                    Resumen de carrito
+                </div>
+            </div>
+        </section>
     {% endblock %}

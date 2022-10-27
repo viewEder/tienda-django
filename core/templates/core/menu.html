@@ -12,7 +12,7 @@
               <a class="nav-link {% if request.path == '/' %}active {% endif %}" aria-current="page" href="{% url 'inicio' %}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if request.path == '/catalogo' %}active {% endif %}" href="{% url 'pedidos:catalogo' %}">Catalogo</a>
+              <a class="nav-link {% if request.path == '/tienda/catalogo/' %}active {% endif %}" href="{% url 'pedidos:catalogo' %}">Catalogo</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +38,7 @@
               <div class="btn-group">
                 <!-- Botón del carrito de compra: -->
                 <a 
-                  class="btn btn-outline-warning mx-3 position-relative"
+                  class="btn mx-3 position-relative {% if request.path == '/tienda/carrito/' %}btn-warning {% else %}btn-outline-warning {% endif %}"
                   href="{% url 'pedidos:carrito' %}">
                     <i class="bi bi-cart4"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
