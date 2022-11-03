@@ -60,5 +60,16 @@ def vaciar_Carro(request):                              # Funcion Limpiar el car
     carro.limpiarCarro()                                # Creamos un diccionario vacio
     return redirect('pedidos:catalogo')                 # Actualizamos la sesion.
 
+"""
+REquerimiento para pasarelade pago:
 
+Dar opciones de :
+1. PSE
+2. Tarjeta de Crédito/Debito
+    # Nombre de Banco
+    # Cédula de titular
+    # Nombre Titular
+    # Valor
+
+"""
 
