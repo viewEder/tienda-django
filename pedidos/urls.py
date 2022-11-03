@@ -15,6 +15,8 @@ urlpatterns = [
     # Urls del carrito de compras:
     path('carrito/', carritoCompras.as_view(), name = 'carrito'),
     path('agregar/<int:producto_id>', views.agregar_Producto, name='agregar'),
+    path('adicionar/<int:producto_id>', views.adicionar_Producto, name='adicionar'),
     path('eliminar/<int:producto_id>', views.eliminar_Producto, name='eliminar'),
     path('restar/<int:producto_id>', views.restar_Producto, name='restar'),
+    path('vaciar/', views.vaciar_Carro, name='vaciar'),
 ]

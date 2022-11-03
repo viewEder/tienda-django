@@ -10,55 +10,48 @@
                     <div class="row">
                         <!-- Validación de existencia de objetos en el carrito -->
                         {% if request.session.carro.items %}
-                            <!-- Colocamos el resumen detallado del producto -->
-                            <!-- Cabeceras-->
-                            <div class="col-3 text-center">
-                                <h5 class="text-center">Vista Previa</h5>
-                            </div>
-                            <div class="col-4 text-center">
-                                <h5 class="text-center">Nombre Producto</h5>
-                            </div>
-                            <div class="col-3 text-center">
-                                <h5 class="text-center">Cant.</h5>
-
-                            </div>
-                            <div class="col-2 text-center">
-                                <h5 class="text-center">Costo producto</h5>
-                            </div>
-
-                            <!-- Recorremos el diccionario del carrito con el detalle del mismo: -->
-                            
+                            <!-- Recorremos el diccionario del carrito con el detalle del mismo: -->                         
                             {% for key, value in request.session.carro.items %}
-                                <div class="col-3 text-center">
-                                    <img src="{{ value.imagen }}" alt="" class="img-fluid">
-                                </div>
-                                <div class="col-4">
-                                    <h6 class="text-success">{{ value.nombre }}</h6>
-                                </div>
-                                <div class="col-3 text-center row">
-                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <a  href="{% url 'pedidos:restar' value.producto_id %}"
-                                            class="btn btn-danger">
-                                            <i class="bi bi-dash"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-warning">{{ value.cantidad }}</button>
-                                        <button type="button" class="btn btn-success"> + </button>
-                                      </div>
-                                    <div class="col">
-                                        <a  
-                                            href="{% url 'pedidos:eliminar' value.producto_id %}" 
-                                            class="btn btn-danger btn-sm" >
-                                            <i class="bi bi-trash3-fill"></i>
-                                        </a>
+                            <!--
+                                <input type="hidden" name="precio" id="precio" value="{{ value.precio }}">
+                                <input type="hidden" name="cantidad" id="cantidad" value="{{ value.cantidad }}">
+                            -->
+                                <div class="card mb-3"">
+                                    <div class="row g-0">
+                                        <div class="col-md-2">
+                                            <img src="{{ value.imagen }}" class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ value.nombre }}</h5>
+                                                <h5 class="card-tittle" id="precio">{{ value.precio }}</h5>
+                                                <p class="card-text">{{ value.cantidad }}</p>
+
+                                                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                    <a  href="{% url 'pedidos:restar' value.producto_id %}"
+                                                        class="btn btn-warning mx-2">
+                                                        <i class="bi bi-dash"></i>
+                                                    </a>
+                                                    <a  
+                                                        href="{% url 'pedidos:eliminar' value.producto_id %}" 
+                                                        class="btn btn-danger mx-2 " >
+                                                        <i class="bi bi-trash3-fill"></i>
+                                                    </a>
+                                                    <a  class="btn btn-success mx-2"
+                                                        href="{% url 'pedidos:adicionar' value.producto_id %}">
+                                                        <i class="bi bi-plus"></i>
+                                                    </a>
+                                                </div>
+                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-2 text-center">
-                                    <h6 class="text-primary">{{ value.precio }}</h6>
-                                </div>
                             {% endfor %}
+                            
                         {% else %}
-                            <div class="col bd-info">
-                                <h4 class="text-light">El carrito de compras está vacio</h4>
+                            <div class="col bg-warning mx-3">
+                                <h4 class="text-danger text-center">El carrito de compras está vacio</h4>
                             </div>
                         {% endif %}
 
@@ -76,8 +69,25 @@
                                 Proceder a pagar
                             </button>
                         </div>
+                        <small>
+                            <div class="col-12 mt-5">
+                                <a  class="btn btn-lg btn-danger col-12 text-center"
+                                    href="{% url 'pedidos:vaciar'%}">
+                                    Vaciar Carrito
+                                </a>
+                            </div>
+                        </small>
                     </div>
                 </div>
             </div>
         </section>
+        
+
+        <script>
+            valorunitario = document.getElementById('precio').value;
+            cantidad = document.getElementById('cantidad').value;
+            total = valorunitario * cantidad;
+            console.log(valorunitario, cantidad, total)
+            //valortotal = valorunitario * 
+        </script>
     {% endblock %}

@@ -35,6 +35,14 @@ def agregar_Producto(request, producto_id):
     carro.agregarProducto(producto = producto)          # Pasamos la tupla del query al método de Carro
     return redirect('pedidos:catalogo')                 # Redireccionamos al catalogo de productos
 
+# Vistas funcionalidades del carrito de compras:
+def adicionar_Producto(request, producto_id):
+    carro = Carro(request)                              # Creamos un objeto de la clase carro
+    producto = Producto.objects.get(id = producto_id)   # Ejecuto el query a la base de datos para que me traiga el producto agregado
+    # Ejecutamos el método agregarProducto:
+    carro.agregarProducto(producto = producto)          # Pasamos la tupla del query al método de Carro
+    return redirect('pedidos:carrito')                  # Redireccionamos al catalogo de productos
+
 def eliminar_Producto(request, producto_id):            
     carro = Carro(request)                              # Creamos el objeto carro de la Clase Carro
     producto = Producto.objects.get(id = producto_id)   # Obtenemos el producto y lo tomamos como referencia para sacarlo del carro
@@ -47,6 +55,10 @@ def restar_Producto(request, producto_id):
     carro.restarProducto(producto = producto)           # Eliminamos el producto del carro
     return redirect('pedidos:carrito')                  # Nos redirigimos al carrito de la tienda
 
+def vaciar_Carro(request):                              # Funcion Limpiar el carrito completo:
+    carro = Carro(request)                              # objeto Carro
+    carro.limpiarCarro()                                # Creamos un diccionario vacio
+    return redirect('pedidos:catalogo')                 # Actualizamos la sesion.
 
 
 
