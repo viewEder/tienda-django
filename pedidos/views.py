@@ -35,6 +35,18 @@ def agregar_Producto(request, producto_id):
     carro.agregarProducto(producto = producto)          # Pasamos la tupla del query al método de Carro
     return redirect('pedidos:catalogo')                 # Redireccionamos al catalogo de productos
 
+def eliminar_Producto(request, producto_id):            
+    carro = Carro(request)                              # Creamos el objeto carro de la Clase Carro
+    producto = Producto.objects.get(id = producto_id)   # Obtenemos el producto y lo tomamos como referencia para sacarlo del carro
+    carro.eliminarProducto(producto = producto)         # Eliminamos el producto del carro
+    return redirect('pedidos:carrito')                  # Nos redirigimos al carrito de la tienda
+
+def restar_Producto(request, producto_id):
+    carro = Carro(request)                              # Creamos el objeto carro de la Clase Carro
+    producto = Producto.objects.get(id = producto_id)   # Obtenemos el producto y lo tomamos como referencia para sacarlo del carro
+    carro.restarProducto(producto = producto)           # Eliminamos el producto del carro
+    return redirect('pedidos:carrito')                  # Nos redirigimos al carrito de la tienda
+
 
 
 

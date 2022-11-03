@@ -43,11 +43,20 @@ class Carro:
 
     def eliminarProducto(self, producto):
         """Eliminar productos al carro"""
-        pass
+        producto.id = str(producto.id)                          # Convertimos en string el producto id, porque es la clave de nuestro objeto
+        if producto.id in self.carro:                           # Si esta clave se encuentra en el objeto carro
+            del self.carro[producto.id]                         # Eliminamos esta clave del objeto
+            self.guadarCarro()                                  # Actualizamos el carrito de compras
 
     def restarProducto(self, producto):
         """Restar unidades de productos del carro"""
-        pass
+        for key, value in self.carro.items():
+            if key == str(producto.id):
+                value['cantidad'] = value['cantidad'] - 1
+                if value['cantidad'] < 1:
+                    self.eliminarProducto(producto)
+                break
+        self.guadarCarro()
 
     def limpiarCarro(self):
         """Vaciar todos los productos del carro"""

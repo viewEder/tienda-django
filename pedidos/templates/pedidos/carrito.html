@@ -12,32 +12,44 @@
                         {% if request.session.carro.items %}
                             <!-- Colocamos el resumen detallado del producto -->
                             <!-- Cabeceras-->
-                            <div class="col-4 text-center">
+                            <div class="col-3 text-center">
                                 <h5 class="text-center">Vista Previa</h5>
                             </div>
                             <div class="col-4 text-center">
                                 <h5 class="text-center">Nombre Producto</h5>
                             </div>
-                            <div class="col-2 text-center">
+                            <div class="col-3 text-center">
                                 <h5 class="text-center">Cant.</h5>
 
                             </div>
                             <div class="col-2 text-center">
-                                <h5 class="text-center">Total</h5>
+                                <h5 class="text-center">Costo producto</h5>
                             </div>
 
                             <!-- Recorremos el diccionario del carrito con el detalle del mismo: -->
                             
                             {% for key, value in request.session.carro.items %}
-                                <div class="col-4 text-center">
-                                    <img src="{{ value.imagen.url }}" alt="" class="img-fluid">
+                                <div class="col-3 text-center">
+                                    <img src="{{ value.imagen }}" alt="" class="img-fluid">
                                 </div>
                                 <div class="col-4">
                                     <h6 class="text-success">{{ value.nombre }}</h6>
                                 </div>
-                                <div class="col-2 text-center">
-                                    <div class="form-control col">
-                                        <input type="text" class="form-control" value="{{ value.cantidad }}">
+                                <div class="col-3 text-center row">
+                                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                        <a  href="{% url 'pedidos:restar' value.producto_id %}"
+                                            class="btn btn-danger">
+                                            <i class="bi bi-dash"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-warning">{{ value.cantidad }}</button>
+                                        <button type="button" class="btn btn-success"> + </button>
+                                      </div>
+                                    <div class="col">
+                                        <a  
+                                            href="{% url 'pedidos:eliminar' value.producto_id %}" 
+                                            class="btn btn-danger btn-sm" >
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-2 text-center">
@@ -52,8 +64,19 @@
 
                     </div>
                 </div>
-                <div class="col">
-                    Resumen de carrito
+                <div class="col bg-secondary text-light">
+                    <h3 class="text-center text-warning">Resumen de la compra</h3>
+                    <div class="row">
+                        <div class="col-6">Total a Pagar:</div>
+                        <div class="col-6">${{ Total_Carro |intcomma }}</div>
+                        <div class="col-6">Cantidad de productos:</div>
+                        <div class="col-6">{{ Cantidad_Carro }}</div>
+                        <div class="col-12 mt-5">
+                            <button class="btn btn-lg btn-success col-12 text-center">
+                                Proceder a pagar
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
