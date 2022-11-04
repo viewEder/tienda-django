@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'core',
     'django_cleanup',
     'pedidos',
+    'facturacion',
 ]
 
 MIDDLEWARE = [
