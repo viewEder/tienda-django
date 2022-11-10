@@ -24,8 +24,9 @@
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ value.nombre }}</h5>
-                                                <h5 class="card-tittle" id="precio">{{ value.precio }}</h5>
+                                                <h5 class="card-tittle" id="precio">{{ value.subtotal }}</h5>
                                                 <p class="card-text">{{ value.cantidad }}</p>
+                                                <p class="card-text"><small class="text-muted">Valor unitario: {{ value.precio }}</small></p>
 
                                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                     <a  href="{% url 'pedidos:restar' value.producto_id %}"
@@ -65,9 +66,9 @@
                         <div class="col-6">Cantidad de productos:</div>
                         <div class="col-6">{{ Cantidad_Carro }}</div>
                         <div class="col-12 mt-5">
-                            <button class="btn btn-lg btn-success col-12 text-center">
+                            <a class="btn btn-lg btn-success col-12 text-center" href="{% url 'pasarela' %}">
                                 Proceder a pagar
-                            </button>
+                            </a>
                         </div>
                         <small>
                             <div class="col-12 mt-5">

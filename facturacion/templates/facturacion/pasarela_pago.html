@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% block titulo %}Inicio{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <section class="container">
+        <div class="row">
+            <form action="" method="post" class="row">
+                {% csrf_token %}
+                <input type="hidden" name="id_cliente" id="id_cliente" value="{{ request.user.id }}">
+                <div class="col-6 mt-2">
+                    <label for="">Seleccione la Forma de pago</label>
+                    {{ form.forma_pago }}
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="">Seleccione un Banco de la lista</label>
+                    {{ form.banco }}
+                </div>
+                <div class="col-12 mt-2">
+                    <label for="">Titular de la Cuenta</label>
+                    {{ form.titular }}
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="">Documento de identidad del Tiular</label>
+                    <select name="" id="" class="form-select">
+                        <option value="" selected disabled>Seleccione una Opción</option>
+                        <option value="">Cédula de Ciudadanía</option>
+                        <option value="">Cédula de Extrangería</option>
+                        <option value="">Pasaporte</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="">Documento de identidad del Tiular</label>
+                    {{ form.cc_titular }}
+                </div>
+                <div class="col-6 mt-2">
+                    <label for="">Total a Pagar</label>
+                    <input type="number" name="id_total_pago" id="id_total_pago" value="{{ Total_Carro }}">
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-lg btn-secondary" type="reset">Cancelar</button>
+                    <button class="btn btn-lg btn-primary" type="submit">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}

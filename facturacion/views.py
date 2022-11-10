@@ -1,7 +1,10 @@
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
+from django.views.generic.edit import CreateView
 from django.views import View
+from .forms import DetallePagoForm
+from django.urls import reverse, reverse_lazy
 # Modelos:
 
 # Para pdf:
@@ -10,12 +13,18 @@ from xhtml2pdf import pisa
 from io import BytesIO
 
 # Create your views here.
+
+class PasarelaPago(CreateView):
+    template_name = 'facturacion/pasarela_pago.html'
+    form_class = DetallePagoForm
+    success_url = 'pedidos:catalogo'
+
 class GenerarPDF(View):
     # Usamos método get para modificar lo que queremos ver:
     def get(self, request, *args, **kwargs):
         # pdf a crear:
         template = 'facturacion/pdf/pdf.html'
-        dicc_context = {'Usuario': 'Eder Lara Trujillo', 'Mensaje':'Hola Mundo'}
+        dicc_context = {'carro': request.session['carro'].items()}
         # Función generar pdf:
         pdf = generarPdf(template, dicc_context)
         # Respuesta:
@@ -37,3 +46,4 @@ def generarPdf(template_name, context = {}):
         print(type(result))
         return result.getvalue()
     return None
+

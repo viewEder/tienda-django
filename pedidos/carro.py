@@ -25,7 +25,7 @@ class Carro:
                 "nombre" : producto.nombre_producto,            # estructura
                 "precio" : str(producto.valor_venta),           # El campo precio lo pasamos como str, 
                 "cantidad": 1,
-                "total_esteProducto": str(producto.valor_venta),
+                "subtotal": 1,
                 "imagen" : producto.imagen_producto.url
             }
         else:
@@ -33,7 +33,7 @@ class Carro:
             for key, value in self.carro.items():               # Recorremos todos los items del carrito   
                 if key == str(producto.id):                     # Si encontramos un producto que tiene ese id
                     value['cantidad'] = value['cantidad'] + 1   # Sumamos el valor de la clave cantidad
-                    value['total_esteProducto'] = float(value['total_esteProducto'])  * float(value['cantidad'])
+                    value['subtotal'] = float(producto.valor_venta)  * float(value['cantidad'])
                     break                                       # Terminamos abruptamente el proceso
         # Por último guardamos el carrito de compras:
         self.guadarCarro()
@@ -55,7 +55,7 @@ class Carro:
         for key, value in self.carro.items():
             if key == str(producto.id):
                 value['cantidad'] = value['cantidad'] - 1
-                value['total_esteProducto'] = float(value['total_esteProducto'])  * float(value['cantidad'])
+                value['subtotal'] = float(value['precio'])  * float(value['cantidad'])
                 if value['cantidad'] < 1:
                     self.eliminarProducto(producto)
                 break

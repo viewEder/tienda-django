@@ -1,6 +1,7 @@
 from django.db import models
 # Importamos el modelo de datos de usuario:
 from django.contrib.auth.models import User
+from core.types.bancos import Bancos
 
 # Create your models here.
 class FormaPago(models.Model):
@@ -15,11 +16,11 @@ class FormaPago(models.Model):
 class DetallePago(models.Model):
     forma_pago = models.ForeignKey(FormaPago, on_delete = models.CASCADE)
     cliente = models.ForeignKey(User, on_delete = models.CASCADE)
-    banco = models.CharField(verbose_name = 'Banco', max_length = 30)
+    banco = models.CharField(verbose_name = 'Banco', max_length = 30, choices = Bancos, default="FalaFea")
     titular = models.CharField(verbose_name = 'Titular de la cuenta', max_length = 250)
     cc_titular = models.CharField(verbose_name = 'Documento de identidad', max_length = 20)
     total_pago = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Total a Pagar")
-    iva_pago = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Total a Pagar")
+    iva_pago = models.DecimalField(max_digits = 20, decimal_places = 2, verbose_name = "Iva a Pagar")
     # Atributos de Auditoria:
     create_at = models.DateField(auto_now = False, auto_now_add = True, verbose_name = "Fecha de creación", null = True, blank = True) 
     modify_at = models.DateField(auto_now = True, auto_now_add = False, verbose_name = "Fecha de actualización", null = True, blank = True)
