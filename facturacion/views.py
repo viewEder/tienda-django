@@ -13,11 +13,11 @@ from xhtml2pdf import pisa
 from io import BytesIO
 
 # Create your views here.
-
 class PasarelaPago(CreateView):
     template_name = 'facturacion/pasarela_pago.html'
     form_class = DetallePagoForm
-    success_url = 'pedidos:catalogo'
+    success_url = reverse_lazy('pedidos:vaciar')
+
 
 class GenerarPDF(View):
     # Usamos método get para modificar lo que queremos ver:

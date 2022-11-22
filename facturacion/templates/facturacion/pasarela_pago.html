@@ -5,9 +5,12 @@
     {% load static %}
     <section class="container">
         <div class="row">
+            <div class="col-12 mt-3 mb-5">
+                <h1 class="display-3 text-primary text-center">Pasarela de pago <span class="text-danger">PagueUd</span></h1>
+            </div>
             <form action="" method="post" class="row">
                 {% csrf_token %}
-                <input type="hidden" name="id_cliente" id="id_cliente" value="{{ request.user.id }}">
+                <input type="hidden" name="cliente" id="id_cliente" value="{{ request.user.id }}">
                 <div class="col-6 mt-2">
                     <label for="">Seleccione la Forma de pago</label>
                     {{ form.forma_pago }}
@@ -26,21 +29,34 @@
                         <option value="" selected disabled>Seleccione una Opción</option>
                         <option value="">Cédula de Ciudadanía</option>
                         <option value="">Cédula de Extrangería</option>
-                        <option value="">Pasaporte</option>
+                        <option value="">Pasaporte</option>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
                     </select>
                 </div>
                 <div class="col-6 mt-2">
                     <label for="">Documento de identidad del Tiular</label>
                     {{ form.cc_titular }}
                 </div>
-                <div class="col-6 mt-2">
+                <div class="col-4 mt-2">
                     <label for="">Total a Pagar</label>
-                    <input type="number" name="id_total_pago" id="id_total_pago" value="{{ Total_Carro }}">
+                    <input type="number" readonly  class="form-control" name="total_pago" id="id_total_pago" value="{{ Total_Carro }}">
                 </div>
-
-                <div class="col-12">
-                    <button class="btn btn-lg btn-secondary" type="reset">Cancelar</button>
-                    <button class="btn btn-lg btn-primary" type="submit">Aceptar</button>
+                <div class="col-4 mt-2">
+                    <label for="">Subtotal</label>
+                   <input type="text" class="form-control" value="{{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    subtotal }}">
+                </div>
+                <div class="col-4 mt-2">
+                    <label for="">Iva de este pedidor</label>
+                    <input type="number" readonly  class="form-control" name="iva_pago" id="id_iva_pago" value="{{ iva_pedido }}">
+                </div>
+                <div class="col-12 mt-2 row justify-content-around">
+                    <button class="btn btn-lg btn-secondary col-3 mt-1" type="reset">
+                        <i class="bi bi-x-octagon"></i> 
+                        Cancelar
+                    </button>
+                    <button class="btn btn-lg btn-primary col-3 mt-1" type="submit">
+                        <i class="bi bi-credit-card-2-back"></i> 
+                        Aceptar
+                    </button>
                 </div>
             </form>
         </div>

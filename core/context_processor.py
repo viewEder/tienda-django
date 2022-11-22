@@ -16,7 +16,9 @@ def catalogoCategoria(request):
 # Diccionario del carrito de compras:
 def carritoCompras(request):
     total = 0
+    subtotal = 0
     cantidades = 0
+    iva_pedido =  0
     # Validación de que el carro exita:
     if 'carro' not in request.session:
         request.session['carro'] = {}
@@ -25,4 +27,6 @@ def carritoCompras(request):
         for key, value in request.session['carro'].items():
             total = total + (float(value['precio']) * (float(value['cantidad'])))
             cantidades = cantidades + (int(value['cantidad']))
-    return {'Total_Carro': total, 'Cantidad_Carro': cantidades}
+            subtotal = round((total / 1.19 ),2)
+            iva_pedido = round((total - subtotal),2)
+    return { 'Total_Carro': total, 'Cantidad_Carro': cantidades, 'subtotal': subtotal, 'iva_pedido': iva_pedido }
